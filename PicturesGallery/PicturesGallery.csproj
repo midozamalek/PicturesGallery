@@ -27,7 +27,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\gallery-list\gallery-list.Component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PicturesGallery.BAL\PicturesGallery.BAL.csproj" />
+    <ProjectReference Include="..\PicturesGallery.Infrastructure\PicturesGallery.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\gallery-list\gallery-list.Component.ts" />
   </ItemGroup>
 
   <ItemGroup>

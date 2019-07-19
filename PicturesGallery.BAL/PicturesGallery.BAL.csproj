@@ -14,4 +14,8 @@
     <Folder Include="Blob\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PicturesGallery.Infrastructure\PicturesGallery.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

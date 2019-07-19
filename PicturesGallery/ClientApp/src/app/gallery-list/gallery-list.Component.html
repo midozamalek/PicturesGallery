@@ -1,0 +1,22 @@
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!fileList"><em>Loading...</em></p>
+
+<table class='table table-striped' *ngIf="fileList">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+ 
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let file of fileList">
+      <td>{{ file.name }}</td>
+      <td><a>Download</a> | <a>Delete</a></td>
+      
+    </tr>
+  </tbody>
+</table>

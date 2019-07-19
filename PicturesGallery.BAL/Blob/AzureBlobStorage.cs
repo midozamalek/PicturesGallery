@@ -83,15 +83,7 @@ namespace PicturesGallery.BAL.Azure.Blob
 
         public async Task<List<AzureBlobItem>> ListAsync()
         {
-            try
-            {
-                return await GetBlobListAsync();
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+            return await GetBlobListAsync();
         }
 
         public async Task<List<AzureBlobItem>> ListAsync(string rootFolder)

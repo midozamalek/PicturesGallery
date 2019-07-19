@@ -2,6 +2,7 @@
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 using PicturesGallery.BAL.Azure.Blob;
+using PicturesGallery.Infrastructure.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,34 +23,23 @@ namespace PicturesGallery.BAL.Services
         }
 
 
-        public async Task<List<AzureBlobItem>> ListAsync()
+        public async Task<FilesViewModel> ListAsync()
         {
-            var x=  await _iAzureBlobStorage.ListAsync();
-            return x;
-        }
-        public async Task<string> StoreImage(string filename, byte[] image)
-        {
-            var filenameonly = Path.GetFileName(filename);
-
-            var url = string.Concat(_config["BlobService:StorageUrl"], filenameonly);
-
-            var creds = new StorageCredentials(_config["BlobStorage:Account"], _config["BlobStorage:Key"]);
-            var blob = new CloudBlockBlob(new Uri(url), creds);
-
-            bool shouldUpload = true;
-            if (await blob.ExistsAsync())
+            var model = new FilesViewModel();
+            try
             {
-                await blob.FetchAttributesAsync();
-                if (blob.Properties.Length == image.Length)
+                foreach (var item in await _iAzureBlobStorage.ListAsync())
                 {
-                    shouldUpload = false;
+                    model.Files.Add(
+                        new FileDetails { Name = item.Name, BlobName = item.BlobName });
                 }
             }
-
-            if (shouldUpload) await blob.UploadFromByteArrayAsync(image, 0, image.Length);
-
-
-            return url;
+            catch (Exception )
+            {
+                
+            }
+            return model;
         }
+        
     }
 }

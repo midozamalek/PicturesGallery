@@ -1,4 +1,5 @@
 ﻿using PicturesGallery.BAL.Azure.Blob;
+using PicturesGallery.Infrastructure.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,6 @@ namespace PicturesGallery.BAL.Services
 {
     public interface IImageStorageService
     {
-        Task<string> StoreImage(string filename, byte[] image);
-        Task<List<AzureBlobItem>> ListAsync();
+        Task<FilesViewModel> ListAsync();
     }
 }
