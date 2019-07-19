@@ -27,7 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\gallery-list\file-details.ts" />
+    <None Remove="ClientApp\src\app\gallery-list\files-view-model.ts" />
     <None Remove="ClientApp\src\app\gallery-list\gallery-list.Component.ts" />
+    <None Remove="ClientApp\src\app\gallery-list\gallery.Service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,7 +39,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\gallery-list\file-details.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\gallery-list\files-view-model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\gallery-list\gallery-list.Component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\gallery-list\gallery.Service.ts" />
   </ItemGroup>
 
   <ItemGroup>

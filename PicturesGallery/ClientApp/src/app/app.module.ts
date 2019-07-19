@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { GalleryListComponent } from './gallery-list/gallery-list.Component';
+import { GalleryService } from './gallery-list/gallery.Service';
 
 
 @NgModule({
@@ -33,7 +34,7 @@ import { GalleryListComponent } from './gallery-list/gallery-list.Component';
 
     ])
   ],
-  providers: [],
+  providers: [GalleryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

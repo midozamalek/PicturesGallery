@@ -1,5 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { FilesViewModel } from './files-view-model';
+import { FileDetails } from './file-details';
+import { GalleryService } from './gallery.Service';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-gallery-list',
@@ -7,21 +11,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GalleryListComponent {
   public fileList: FileDetails[];
-  
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<FilesViewModel>(baseUrl + 'api/Gallery/ListAsync').subscribe(result => {
-      this.fileList = result.files;
-    }, error => console.error(error));
+
+  constructor(galleryService: GalleryService) {
+    galleryService.ListAsync().subscribe((res: any) => {
+      this.fileList = res.files;
+    });
   }
 }
 
- 
 
-export interface FilesViewModel {
-  files:  FileDetails[] ;
-}
 
-export interface FileDetails {
-  name: string;
-  blobName: string;
-}
+
+
+
