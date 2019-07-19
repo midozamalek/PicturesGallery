@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PicturesGallery.BAL.Services;
 
 namespace PicturesGallery.Controllers
 {
@@ -17,16 +18,19 @@ namespace PicturesGallery.Controllers
 
         private readonly ILogger<SampleDataController> _logger;
 
-        public SampleDataController(ILogger<SampleDataController> logger)
+        private readonly IImageStorageService _imageStorageService;
+
+        public SampleDataController(ILogger<SampleDataController> logger, IImageStorageService imageStorageService)
         {
             _logger = logger;
+            _imageStorageService = imageStorageService;
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<WeatherForecast> WeatherForecasts()
+        public async Task<IEnumerable<WeatherForecast>> WeatherForecasts()
         {
             _logger.LogInformation("HomeController.Index method called!!!");
-
+            var c = await _imageStorageService.ListAsync();
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PicturesGallery.BAL;
+using PicturesGallery.BAL.Azure.Blob;
 
 namespace PicturesGallery
 {
@@ -20,7 +22,14 @@ namespace PicturesGallery
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            services.AddScoped<IAzureBlobStorage>(factory =>
+            {
+                return new AzureBlobStorage(new AzureBlobSetings(
+                   storageAccount: Configuration["Blob_StorageAccount"],
+                   storageKey: Configuration["Blob_StorageKey"],
+                   containerName: Configuration["Blob_ContainerName"]));
+            });
+            services.configureBALServices();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
