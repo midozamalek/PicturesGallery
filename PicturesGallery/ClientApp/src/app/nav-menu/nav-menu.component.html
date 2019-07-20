@@ -10,9 +10,12 @@
         <ul class="navbar-nav flex-grow">
           <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
             <a class="nav-link text-dark" [routerLink]='["/"]'>Home</a>
-          </li>         
+          </li>
           <li class="nav-item" [routerLinkActive]='["link-active"]'>
             <a class="nav-link text-dark" [routerLink]='["/gallery-list"]'>Gallery</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' [hidden]="!IsAuthenticated">
+            <button class="btn btn-link" (click)="Logout()">Logout</button>
           </li>
         </ul>
       </div>

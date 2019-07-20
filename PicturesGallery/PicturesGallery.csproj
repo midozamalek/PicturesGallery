@@ -27,10 +27,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\authentication-service.ts" />
     <None Remove="ClientApp\src\app\gallery-list\file-details.ts" />
     <None Remove="ClientApp\src\app\gallery-list\files-view-model.ts" />
     <None Remove="ClientApp\src\app\gallery-list\gallery-list.Component.ts" />
     <None Remove="ClientApp\src\app\gallery-list\gallery.Service.ts" />
+    <None Remove="ClientApp\src\app\login\login.Component.ts" />
+    <None Remove="ClientApp\src\app\login\user-model.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,10 +42,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\authentication-service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\gallery-list\file-details.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\gallery-list\files-view-model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\gallery-list\gallery-list.Component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\gallery-list\gallery.Service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\login\login.Component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\login\user-model.ts" />
   </ItemGroup>
 
   <ItemGroup>

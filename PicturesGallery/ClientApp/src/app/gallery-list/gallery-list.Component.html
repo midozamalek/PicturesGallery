@@ -24,6 +24,9 @@
   <button class="btn " (click)="ShowUploud() ">Toggle Uploud</button>
 </div>
 <table class='table table-striped' *ngIf="fileList" [hidden]="showUploud">
+  <div style="padding-top:20px">
+    <button class="btn btn-danger" (click)="DeletAll() ">Delet All</button>
+  </div>
   <thead>
     <tr>
       <th>Name</th>

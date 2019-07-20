@@ -13,11 +13,11 @@ namespace PicturesGallery.Controllers
     [Route("api/[controller]")]
     public class GalleryController : Controller
     {
-        private readonly ILogger<SampleDataController> _logger;
+        private readonly ILogger<GalleryController> _logger;
 
         private readonly IImageStorageService _imageStorageService;
 
-        public GalleryController(ILogger<SampleDataController> logger, IImageStorageService imageStorageService)
+        public GalleryController(ILogger<GalleryController> logger, IImageStorageService imageStorageService)
         {
             _logger = logger;
             _imageStorageService = imageStorageService;
