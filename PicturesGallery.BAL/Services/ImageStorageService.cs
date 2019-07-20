@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 using PicturesGallery.BAL.Azure.Blob;
@@ -15,11 +16,13 @@ namespace PicturesGallery.BAL.Services
     {
         private readonly IConfiguration _config;
         private readonly IAzureBlobStorage _iAzureBlobStorage;
+        private readonly ILogger<ImageStorageService> _logger;
 
-        public ImageStorageService(IConfiguration config, IAzureBlobStorage iAzureBlobStorage)
+        public ImageStorageService(IConfiguration config, IAzureBlobStorage iAzureBlobStorage, ILogger<ImageStorageService> logger)
         {
             _config = config;
             _iAzureBlobStorage = iAzureBlobStorage;
+            _logger = logger;
         }
 
 
@@ -34,30 +37,55 @@ namespace PicturesGallery.BAL.Services
                         new FileDetails { Name = item.Name, BlobName = item.BlobName });
                 }
             }
-            catch (Exception )
+            catch (Exception ex)
             {
-                
+                _logger.Log(LogLevel.Error, ex.Message);
+                throw ;
             }
             return model;
         }
 
         public async Task<byte[]> DownloadAsync(string blobName)
-        {            
-            var stream = await _iAzureBlobStorage.DownloadAsync(blobName);
-            return stream.ToArray();
+        {
+            try
+            {
+                var stream = await _iAzureBlobStorage.DownloadAsync(blobName);
+                return stream.ToArray();
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, ex.Message);
+                throw;
+            }
         }
 
-        public async Task<bool> Delete(string blobName)
-        {            
-            await _iAzureBlobStorage.DeleteAsync(blobName);
-            return true;
+        public async Task<bool> DeleteAsync(string blobName)
+        {
+            try
+            {
+                await _iAzureBlobStorage.DeleteAsync(blobName);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, ex.Message);
+                throw;
+            }
         }
 
 
         public async Task<bool>UploadAsync(string blobName, MemoryStream fileStream)
         {
-            await _iAzureBlobStorage.UploadAsync(blobName, fileStream);
-            return true;
+            try
+            {
+                await _iAzureBlobStorage.UploadAsync(blobName, fileStream);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, ex.Message);
+                throw;
+            }
         }
 
     }

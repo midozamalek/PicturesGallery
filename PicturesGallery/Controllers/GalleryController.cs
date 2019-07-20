@@ -26,22 +26,42 @@ namespace PicturesGallery.Controllers
         [HttpGet("[action]")]
         public async Task<FilesViewModel> List()
         {
-            return await _imageStorageService.ListAsync();           
+            try
+            {
+                return  await _imageStorageService.ListAsync();
+            }
+            catch (Exception)
+            {
+                return null;
+            }           
         }
 
         [HttpGet("[action]")]
         public async Task<IActionResult> Download(string blobName, string name)
-        {            
-            var byteImg = await _imageStorageService.DownloadAsync(blobName);
-            return File(byteImg, "application/octet-stream", name);
+        {
+            try
+            {
+                var byteImg = await _imageStorageService.DownloadAsync(blobName);
+                return File(byteImg, "application/octet-stream", name);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpGet("[action]")]
         public async Task<bool> Delete(string blobName)
         {
-            await _imageStorageService.Delete(blobName);
-            return true;
-        }
+            try
+            {
+                return await _imageStorageService.DeleteAsync(blobName);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+         }
 
         [HttpPost("[action]"), DisableRequestSizeLimit]
         public async Task<ContentResult> UploadAsync()
@@ -55,9 +75,9 @@ namespace PicturesGallery.Controllers
                 await _imageStorageService.UploadAsync(blobName, filestream);
                 return Content(file.FileName);
             }
-            catch (System.Exception ex)
+            catch (Exception )
             {
-                return Content(ex.Message);
+                return Content("Failed to uploud file.");
             }
         }
 

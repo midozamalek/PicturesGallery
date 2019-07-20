@@ -12,7 +12,7 @@ namespace PicturesGallery.BAL.Services
     {
         Task<FilesViewModel> ListAsync();
         Task<byte[]> DownloadAsync(string blobName);
-        Task<bool> Delete(string blobName);
+        Task<bool> DeleteAsync(string blobName);
         Task<bool> UploadAsync(string blobName, MemoryStream fileStream);
     }
 }

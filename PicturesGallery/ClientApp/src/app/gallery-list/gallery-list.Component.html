@@ -3,35 +3,42 @@
 <p>This component demonstrates fetching data from the server.</p>
 <p *ngIf="!fileList"><em>Loading...</em></p>
 
-<div class="panel panel-default" *ngIf="fileList">
+
+<p *ngIf="showMsg" class="alert alert-success">{{ msg }}</p>
+
+
+<div class="panel panel-default" [hidden]="!showUploud">
   <div class="panel-heading">Uploud Image</div>
   <div class="panel-body">
-    <input #file type='file' (change)="onSelectFile($event, file.files)">
+    <input #file type='file' (change)="onSelectFile($event, file.files)" accept="image/*">
     <button class="btn " (click)="uploadImage() ">Uploud</button>
-    <div class="progress">
+    <div class="progress" style="padding-top:10px">
       <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" [style.width]="progress + '%'">
         {{progress}}%
       </div>
     </div>
   </div>
-
-  <table class='table table-striped'>
-    <thead>
-      <p *ngIf="showMsg" class="alert alert-success">{{ msg }}</p>
-      <tr>
-        <th>Name</th>
-        <th>Actions</th>
-
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let file of fileList">
-        <td>{{ file.name }}</td>
-        <td>
-          <a href="/api/Gallery/Download?blobName={{file.blobName}}&Name= {{file.name}}">Download </a> |
-          <button class="btn btn-link" (click)="Delete(file.blobName) ">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 </div>
+
+<div style="padding-top:20px">
+  <button class="btn " (click)="ShowUploud() ">Toggle Uploud</button>
+</div>
+<table class='table table-striped' *ngIf="fileList" [hidden]="showUploud">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let file of fileList">
+      <td>{{ file.name }}</td>
+      <td>
+        <a href="/api/Gallery/Download?blobName={{file.blobName}}&Name= {{file.name}}">Download </a> |
+        <button class="btn btn-link" (click)="Delete(file.blobName) ">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+

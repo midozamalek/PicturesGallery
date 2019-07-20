@@ -17,6 +17,9 @@ export class GalleryListComponent {
   file: any;
   progress: any=0;
   galleryService: GalleryService;
+  showUploud: boolean = false;
+
+
   constructor(_galleryService: GalleryService) {
     this.galleryService = _galleryService;
     this.baseUrl = _galleryService.baseUrl;
@@ -39,9 +42,17 @@ export class GalleryListComponent {
     this.file = file;
   }
 
+  ShowUploud() {
+    this.showUploud = !this.showUploud;
+  }
+
+  isFileImage(file): boolean {
+    return file.type.split('/')[0] === 'image';
+  }
 
   uploadImage() {
-    if (this.file.length === 0) {
+    debugger;
+    if (this.file.length === 0 || (this.isFileImage(this.file[0]) == false)) {
       return;
     }
 
