@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { FilesViewModel } from './files-view-model';
 @Injectable()
 export class GalleryService {
@@ -12,6 +12,20 @@ export class GalleryService {
 
 
   ListAsync() : any {
-   return this.http.get<FilesViewModel>(this.baseUrl + 'api/Gallery/ListAsync');
+   return this.http.get<FilesViewModel>(this.baseUrl + 'api/Gallery/List');
   }
+
+  Delete(blobName: string): any {
+    return this.http.get<boolean>(this.baseUrl + 'api/Gallery/Delete?blobName=' + blobName);
+  }
+
+  Uploud(formData: FormData): any {
+    const uploadReq = new HttpRequest('POST', 'api/Gallery/UploadAsync', formData, {
+      reportProgress: true,      
+      responseType: 'text' 
+    });
+
+    return this.http.request(uploadReq);
+  }
+
 }

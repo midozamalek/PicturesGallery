@@ -1,22 +1,37 @@
-<h1>Weather forecast</h1>
+<h1>Gallery </h1>
 
 <p>This component demonstrates fetching data from the server.</p>
-
 <p *ngIf="!fileList"><em>Loading...</em></p>
 
-<table class='table table-striped' *ngIf="fileList">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Actions</th>
- 
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let file of fileList">
-      <td>{{ file.name }}</td>
-      <td><a>Download</a> | <a>Delete</a></td>
-      
-    </tr>
-  </tbody>
-</table>
+<div class="panel panel-default" *ngIf="fileList">
+  <div class="panel-heading">Uploud Image</div>
+  <div class="panel-body">
+    <input #file type='file' (change)="onSelectFile($event, file.files)">
+    <button class="btn " (click)="uploadImage() ">Uploud</button>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" [style.width]="progress + '%'">
+        {{progress}}%
+      </div>
+    </div>
+  </div>
+
+  <table class='table table-striped'>
+    <thead>
+      <p *ngIf="showMsg" class="alert alert-success">{{ msg }}</p>
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let file of fileList">
+        <td>{{ file.name }}</td>
+        <td>
+          <a href="/api/Gallery/Download?blobName={{file.blobName}}&Name= {{file.name}}">Download </a> |
+          <button class="btn btn-link" (click)="Delete(file.blobName) ">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -40,6 +40,25 @@ namespace PicturesGallery.BAL.Services
             }
             return model;
         }
-        
+
+        public async Task<byte[]> DownloadAsync(string blobName)
+        {            
+            var stream = await _iAzureBlobStorage.DownloadAsync(blobName);
+            return stream.ToArray();
+        }
+
+        public async Task<bool> Delete(string blobName)
+        {            
+            await _iAzureBlobStorage.DeleteAsync(blobName);
+            return true;
+        }
+
+
+        public async Task<bool>UploadAsync(string blobName, MemoryStream fileStream)
+        {
+            await _iAzureBlobStorage.UploadAsync(blobName, fileStream);
+            return true;
+        }
+
     }
 }
