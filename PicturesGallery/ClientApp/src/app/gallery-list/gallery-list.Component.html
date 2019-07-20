@@ -11,7 +11,7 @@
   <div class="panel-heading">Uploud Image</div>
   <div class="panel-body">
     <input #file type='file' (change)="onSelectFile($event, file.files)" accept="image/*">
-    <button class="btn " (click)="uploadImage() ">Uploud</button>
+    <button class="btn btn-primary" (click)="uploadImage() ">Uploud</button>
     <div class="progress" style="padding-top:10px">
       <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" [style.width]="progress + '%'">
         {{progress}}%
@@ -24,14 +24,14 @@
   <button class="btn " (click)="ShowUploud() ">Toggle Uploud</button>
 </div>
 <table class='table table-striped' *ngIf="fileList" [hidden]="showUploud">
-  <div style="padding-top:20px">
-    <button class="btn btn-danger" (click)="DeletAll() ">Delet All</button>
-  </div>
+ 
   <thead>
     <tr>
       <th>Name</th>
       <th>Actions</th>
-
+      <th>
+        <button class="btn btn-danger" (click)="DeletAll() ">Delete All</button>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -41,6 +41,7 @@
         <a href="/api/Gallery/Download?blobName={{file.blobName}}&Name= {{file.name}}">Download </a> |
         <button class="btn btn-link" (click)="Delete(file.blobName) ">Delete</button>
       </td>
+      
     </tr>
   </tbody>
 </table>

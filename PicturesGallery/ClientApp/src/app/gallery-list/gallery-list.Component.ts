@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { FilesViewModel } from './files-view-model';
 import { FileDetails } from './file-details';
@@ -91,7 +91,13 @@ export class GalleryListComponent implements OnInit {
 
   DeletAll() {
     if (this.authenticationService.IsAuthinticated()) {
-
+      this.galleryService.DeleteAll().subscribe((res: any) => {
+        if (res == true) {
+          this.msg = 'success deleting!';
+          this.showMsg = true;
+          window.location.reload();
+        }
+      });
     }
     else
       this.router.navigate(['/login']);

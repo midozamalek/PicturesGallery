@@ -19,6 +19,10 @@ export class GalleryService {
     return this.http.get<boolean>(this.baseUrl + 'api/Gallery/Delete?blobName=' + blobName);
   }
 
+  DeleteAll(): any {
+    return this.http.get<boolean>(this.baseUrl + 'api/Gallery/DeleteAll');
+  }
+
   Uploud(formData: FormData): any {
     const uploadReq = new HttpRequest('POST', 'api/Gallery/UploadAsync', formData, {
       reportProgress: true,      

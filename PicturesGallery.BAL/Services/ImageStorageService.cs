@@ -88,5 +88,22 @@ namespace PicturesGallery.BAL.Services
             }
         }
 
+        public async Task<bool> DeleteAllAsync()
+        {
+            try
+            {
+                foreach (var item in await _iAzureBlobStorage.ListAsync())
+                {
+                    await _iAzureBlobStorage.DeleteAsync(item.BlobName);
+                }                
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, ex.Message);
+                throw;
+            }
+        }
+
     }
 }

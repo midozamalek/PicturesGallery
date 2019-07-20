@@ -63,6 +63,19 @@ namespace PicturesGallery.Controllers
             }
          }
 
+        [HttpGet("[action]")]
+        public async Task<bool> DeleteAll()
+        {
+            try
+            {
+                return await _imageStorageService.DeleteAllAsync();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         [HttpPost("[action]"), DisableRequestSizeLimit]
         public async Task<ContentResult> UploadAsync()
         {
