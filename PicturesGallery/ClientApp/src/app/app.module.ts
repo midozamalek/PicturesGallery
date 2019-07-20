@@ -18,8 +18,6 @@ import { GalleryService } from './gallery-list/gallery.Service';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     GalleryListComponent
   ],
   imports: [
@@ -27,9 +25,7 @@ import { GalleryService } from './gallery-list/gallery.Service';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: '', component: GalleryListComponent, pathMatch: 'full' },      
       { path: 'gallery-list', component: GalleryListComponent },
 
     ])
